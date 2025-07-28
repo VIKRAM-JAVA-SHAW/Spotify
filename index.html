@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify - Web Player:Music for everyone</title>
+  <style>
+    .container{
+        display: grid;
+         grid-template-columns: repeat(3,1fr);
+         grid-template-rows: repeat(6,1fr);
+         column-gap: 5px;
+         row-gap: 5px;
+    }
+    .item{
+        background-color: rgb(52, 48, 48);
+        width:200px;
+        height:100px;
+    }
+    .item:nth-child(2){
+      grid-column-start: 2;
+      grid-column-end: 4;
+      grid-row-start: 1;
+      grid-row-end: 7;
+      height: 803px;
+      width: 1000px;
+      position: relative;
+    }
+    .item:nth-child(1){
+        width: 424px;
+        height: 130px;
+        position: absolute;
+    }
+    .item:nth-child(3){
+        grid-row-start: 2;
+        grid-row-end: 7;
+        height: 669px;
+        width: 423px;
+        overflow-y: scroll;
+        position: relative;
+    }
+    #search{
+        position: absolute;
+        bottom: 15px;
+        left: 20px;
+    }
+    #i1{
+        background-color: rgb(50, 49, 49);
+        font-weight:bolder;
+        color: white;
+        border: none;
+        position: absolute;
+        bottom: 16px;
+        left: 45px;
+    }
+    #i1::placeholder{
+        color: white;
+        font-size: 13px;
+    }
+    #home{
+        color: white;
+        text-decoration: none;
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        font-weight: bolder;
+        position: absolute;
+        bottom: 40px;
+        font-size: 14px;
+        left: 50px;
+    }
+    #card{
+        height: 350px;
+        width: 250px;
+        margin: 0px 30px;
+        background-color:rgb(99, 97, 97);
+        transition-duration: 0s;
+        transition-delay: 0ms;
+        transition-timing-function: ease-in-out;
+    }
+    #card img{
+        height: 230px;
+        width: 230px;
+        margin: 10px 10px;
+        object-fit:cover;
+    }
+    .playbar{
+        width: 100%; 
+        height:110px; 
+        background-color: rgba(49, 49, 159, 0.368);
+        position: absolute; 
+        bottom:2px; 
+        border-radius: 5%; 
+        color: white;
+        display: non
+    }
+    .playbar div{
+        margin:20px;
+    }
+    #inp{
+        -webkit-appearance: none;
+        background-color: white;
+        width:890px;
+        height: 5px;
+        position: absolute;
+        bottom: 10px;
+        left:50px;
+    }
+    #inp::-webkit-slider-thumb{
+        -webkit-appearance: none;
+        background-color: rgb(233, 127, 127);
+        height:20px;
+        width:20px;
+        border-radius: 50%;
+    }
+    .duration{
+        color: white;
+        position: absolute;
+        bottom: 50px;
+        right:70px;
+    }
+    #sound{
+     -webkit-appearance: none;
+     height: 5px;
+     position: absolute;
+     bottom: 50px;
+     right: 300px;
+    }
+    #sound::-webkit-slider-thumb{
+        -webkit-appearance: none;
+        border-radius: 50%;
+        height:13px;
+        width: 13px;
+        background-color: rgb(249, 143, 4);
+    }
+    .horn img{
+        position: absolute;
+        bottom: 40px;
+        left:530px;
+        height:30px;
+    }
+    .invisible{
+        display: none;
+    }
+    #card:hover{
+        background-color: black;
+    }
+  </style>
+</head>
+<body style="background-color: black;">
+    <div class="container">
+    <div class="item">
+        <img src="Spotify_Full_Logo_RGB_White.png" alt="logo" height="37px" width="150px" style="margin:10px 10px">
+        <img src="icons8-search-60.png" alt="search" height="20px" id="search">
+        <input type="search" value="" placeholder="Search" id="i1">
+        <a href="http://127.0.0.1:3000/index.html" id="home">Home</a>
+        <a href="http://127.0.0.1:3000/index.html" id="ho">
+            <img src="icons8-home-48.png" alt="home" style="position:absolute; bottom:39px; left: 20px; height: 20px;">
+        </a>
+    </div>
+
+    <div class="item">
+        <div class="nav" style="width:100%; height:90px; background-color: rgb(84, 83, 83);">
+            <button style="color: white; background-color: rgb(84, 83, 83); margin: 25px; border: none;"><</button>
+            <button style="color: white; background-color: rgb(84, 83, 83); border: none;">></button>
+        </div>
+        <p style="margin: 10px 30px; color: #f9f5f5; font-size:xx-large; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-weight: bold;">Spotify Playlists</p>
+        <div id="card">
+            <img src="https://static1.makeuseofimages.com/wordpress/wp-content/uploads/2024/03/woman-listening-to-music-with-headphones.jpg" alt="">
+           <p style="font-size: 30px;font-weight: bold;margin: 0px 12px; color: rgb(218, 208, 208);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">Felling Lonely</p>
+           <p style="font-weight: bold;margin: 0px 12px; color: rgb(218, 208, 208);font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">calm your loneliness</p>
+        </div>
+        <div class="playbar invisible">
+            <div></div>
+        </div> 
+        <input type="range" value="0" min="0" max="100" id="inp" class="invisible"> 
+         <input type="range" value="0.0" min="0.0" max="1" id="sound" step="0.1" class="invisible">     
+        <div class="duration invisible">
+            00:00 / 00:00
+        </div>  
+        <div class="horn invisible">
+            <img src="icons8-sound-50.png" alt="" id="mute">
+        </div>  
+    </div>
+
+    <div class="item" id="lib">
+        <img src="icons8-music-library-50.png" alt="library" height="30px" style="margin:10px 20px;">
+        <span style="color: white; font-size:20px;position: absolute; top: 15px; font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; font-weight: bold;">Your Library</span>
+    </div>
+    </div>
+     <script>
+        let music = async () => {
+    let r = await fetch("http://127.0.0.1:3000/diljit");
+    let response = await r.text(); 
+    let div=document.createElement("div");
+    div.innerHTML=response;
+    let k=div.getElementsByTagName("a");
+    for(let i=2;i<=7;i++)
+    {
+     let library=document.getElementById("lib");
+     var p=document.createElement("div");
+     p.style.backgroundColor=`rgba(23,23,23,0.5)`;
+     p.style.height='100px';
+     p.style.width=`400px`;
+     p.style.margin=`10px`;
+     p.style.border=`0.5px solid white`;
+     p.style.color=`white`;
+     p.style.position=`relative`;
+     let name=k[i].innerHTML;
+     p.innerHTML=`<p style="margin:44px"> ${name} </p>
+            <img src="icons8-musical-note-48.png" alt="library" height="30px" style="position:absolute;top:36px;">
+            <img src="icons8-play-48.png" alt="library" class="play" height="40px"style="position:absolute; top:30px; left:350px">`;
+    
+        library.append(p);
+    }
+    let g=false;
+    addEventListener("keydown",(e)=>{
+      if(e.code="Space")
+      {
+          for(let i=0;i<(b.length);i++)
+          {
+           if(k[i+2].href===audio.src)
+             {
+               var o=i;
+            }
+        }
+        if(g===false)
+         {
+          audio.pause();
+            b[o].src="icons8-play-48.png";
+          g=true;
+         }
+         else
+         {
+         audio.play();         
+            b[o].src="icons8-pause-50.png";          
+          g=false;
+         } 
+      }
+    })
+    let currentsong=null;
+     let re=false;
+    let audio=new Audio();
+    let b=document.getElementsByClassName('play');
+    document.getElementById("mute").addEventListener("click",()=>{
+      if(re===false)
+      {
+        document.getElementById("mute").src="icons8-mute-50.png";
+        audio.muted=true;
+        re=true;
+      }
+      else
+      {
+         document.getElementById("mute").src="icons8-sound-50.png";
+         console.log(audio.volume);
+         audio.muted=false;
+         re=false;
+      }
+    })
+          for(let i=0;i<(b.length);i++)
+          {
+            let flag=false;            
+            b[i].addEventListener("click",async()=>{
+              audio.src= await k[i+2].href;                 
+              if(currentsong==null)
+     {
+      currentsong=audio.src;
+     }
+     else
+     {
+      if(currentsong!=audio.src)
+      {
+        for(let i=0;i<(b.length);i++)
+        {
+          if(currentsong===k[i+2].href)
+          {
+            b[i].src="icons8-play-48.png";
+            currentsong=audio.src;
+          }
+        }
+      }
+     }
+                let playbar=await document.getElementsByClassName("playbar")[0];
+                playbar.style.display=`block`;
+                 playbar.innerHTML=`<div>${k[i+2].innerHTML}</div>`;
+              let inp=await document.getElementById("inp");
+
+              if(flag===false)
+              {
+                await audio.play();
+                var interid=setInterval(()=>{
+                  let sound=document.getElementById("sound").value;
+                  audio.volume=sound;
+                 inp.value=(audio.currentTime/audio.duration)*100;
+                 inp.style.background=`linear-gradient(to right,brown ${inp.value}%,white ${inp.value}%)`;
+                 let m=document.getElementsByClassName("duration")[0];
+                 m.innerHTML=`0${parseInt((audio.currentTime)/60)}:0${parseInt((audio.currentTime)%60)} / 0${parseInt((audio.duration)/60)}:0${parseInt((audio.duration)%60)}`;
+               },100); 
+               inp.addEventListener("input", () => {
+               audio.currentTime = (inp.value / 100) * audio.duration;
+                });
+              b[i].src="icons8-pause-50.png";
+              flag=true;  
+              }
+              else 
+              {
+                const v=await inp.value;
+                await clearInterval(interid);
+                await audio.pause();
+                 b[i].src="icons8-play-48.png";
+                 console.log(v);
+                flag=false;
+                inp.value=v;
+              }
+            })
+        
+          }
+}
+let btn=document.getElementById("card");
+btn.addEventListener("click",async()=>{
+   await music();
+   let di=document.getElementsByClassName("invisible");
+   for(let i=0;i<(di.length);i++)
+   {
+    di[i].style.display=`block`;
+   }
+});
+
+let s=document.getElementById("sound");
+s.addEventListener("input",()=>{
+  s.style.background=`linear-gradient(to right,rgb(249, 143, 4) ${s.value *100}%,white ${s.value *100}%)`;
+});
+
+
+     </script>
+
+</body>
+</html>
